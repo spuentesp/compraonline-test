@@ -40,12 +40,30 @@ class CarInsurance{
     //specialFullCoverage aumenta en +2 cuando quedan 10 dias, en +3 cuando quedan 5, pero al agotarse 
     //se queda en 0.
     specialFullCoverage(product){
+        if(product.sellin > 10){
+            //caso normal de calculo
+            return this.fullCoverage(product);
+        }
+        if(product.sellin > 5){
+            product.price = product.price -2;
+            product.sellin--;
+            return product;
+        }
+        if(product.sellin > 0){
+            product.price = product.price -3;
+            product.sellin--;
+            return product;
+        }
+        //si no retorna previamente los valores son 0.
+        product.price = 0;
+        product.sellin = 0;
         return product;
     }
 
     //supersale pierde valor el doble de rapido.
     superSale(product){
-
+        product.price = product.price -2;
+        product.sellin--;
         return product;
     }
 
